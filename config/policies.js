@@ -18,5 +18,11 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  '/swagger': true,
+  'UsersController': {
+    'check': true,
+    'sendSMS': true
+  },
+  // '*': ['isAuthorized'],
 
 };

@@ -19,7 +19,149 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
+  'GET /api/v1/users/check/:name/:phone': { controller: 'UsersController',action:'check',swagger: {
+      tag: ['check-user'],
+      summary: 'Check if user exists',
+      consumes: ["application/json"],
+      produces: ["application/json"],
+      responses: {
+        "200": {
+          description: "User and phone found"
+        },
+        "400": {
+          description: "Missing parameters"
+        },
+        "404": {
+          description: "User and phone not found"
+        },
+        "500": {
+          description: "Internal server error"
+        },
+      },
+      parameters: [{
+          in: "path",
+          name: "name",
+          required: true,
+          type: "string",
+          description: "User nickname"
+        },
+        {
+          in: "path",
+          name: "phone",
+          required: true,
+          type: "string",
+          description: "User phone (Ex: 17782222222 | 5531999999999)"
+        }
+      ],
+      security: [{
+        "Authorization": []
+      }]
+    }
+  },
+  'POST /api/v1/users/create': { controller: 'UsersController',action:'createFirstStep',swagger: {
+    tag: ['first-step'],
+    summary: 'Create first step for the user',
+    consumes: ["application/json"],
+    produces: ["application/json"],
+    responses: {
+      "201": {
+        description: "User created successfully"
+      },
+      "400": {
+        description: "Missing parameters"
+      },
+      "404": {
+        description: "User and phone not found"
+      },
+      "500": {
+        description: "Internal server error"
+      },
+    },
+    parameters: [{
+        in: "body",
+        name: "data",
+        required: true,
+        type: "object",
+        description: "Body content",
+        properties: {
+          name: {type: 'string'},
+          phone: {type: 'string'} 
+        }
+      },
+    ],
+    security: [{
+      "Authorization": []
+    }]
+  }
+},
+  'GET /api/v1/users/sms/:id': { controller: 'UsersController',action:'sendSMS',swagger: {
+    tag: ['send-sms'],
+    summary: 'Send SMS for user by id',
+    consumes: ["application/json"],
+    produces: ["application/json"],
+    responses: {
+      "200": {
+        description: "SMS sent successfully"
+      },
+      "400": {
+        description: "Missing parameters"
+      },
+      "404": {
+        description: "User and phone not found"
+      },
+      "500": {
+        description: "Internal server error"
+      },
+    },
+    parameters: [{
+        in: "path",
+        name: "id",
+        required: true,
+        type: "string",
+        description: "User id"
+      }
+    ],
+    security: [{
+      "Authorization": []
+    }]
+  },
+},
+'POST /api/v1/users/validateCode': { controller: 'UsersController',action:'validateCode',swagger: {
+  tag: ['validate-sms'],
+  summary: 'Validate Code for user',
+  consumes: ["application/json"],
+  produces: ["application/json"],
+  responses: {
+    "200": {
+      description: "SMS validate successfully"
+    },
+    "400": {
+      description: "Missing parameters"
+    },
+    "404": {
+      description: "User and phone not found"
+    },
+    "500": {
+      description: "Internal server error"
+    },
+  },
+  parameters: [{
+    in: "body",
+    name: "data",
+    required: true,
+    type: "object",
+    description: "Body content",
+    properties: {
+      id: {type: 'integer'},
+      code: {type: 'integer'} 
+    }
+  },
+],
+  security: [{
+    "Authorization": []
+  }]
+},
+},
 
 
   /***************************************************************************
