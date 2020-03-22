@@ -23,7 +23,7 @@ module.exports = {
     } else {
       return res.status(400).json({message:'Missing arguments'});
     } 
-  },
+  }, 
   createFirstStep: async(req,res) => {
     const {name,phone} = req.allParams();
     if (name && phone) {
