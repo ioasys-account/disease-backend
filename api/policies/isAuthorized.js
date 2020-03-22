@@ -33,13 +33,11 @@ module.exports = (req, res, next) => {
 
   JwtService.verify(token, (err, decoded) => {
     if (err) return res.status(401).json('invalid-token');
-    
     req.session.token = token;
-    req.session.client_id = decoded.client;
 
     try {
       Users.findOne({
-        id: decoded.user
+        id: decoded.id
       }).exec((err, result) => {
         if (err) return res.status(400).json(err);
         if (!result) return res.status(404).json('user-not-found');

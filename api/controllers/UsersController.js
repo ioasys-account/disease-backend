@@ -85,6 +85,15 @@ module.exports = {
     } else {
       return res.status(400).json({message:'Missing arguments'});
     }
+  },
+  updateProfile: async(req,res) => {
+    const {name,gender,birthDate} = req.allParams();
+    if (name && gender && birthDate) {
+      const user = await Users.update({id:req.session.user.id},{name:name,gender:gender,birthDate: new Date(birthDate)}).fetch();
+      return res.status(200).json(user);
+    } else {
+      return res.status(400).json({message:'Missing arguments'});
+    }
   }
   
 };

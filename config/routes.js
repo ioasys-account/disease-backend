@@ -163,6 +163,41 @@ module.exports.routes = {
 },
 },
 
+'PATCH /api/v1/users/updateProfile': { controller: 'UsersController',action:'updateProfile',swagger: {
+  tag: ['update-profile'],
+  summary: 'Update profile for user',
+  consumes: ["application/json"],
+  produces: ["application/json"],
+  responses: {
+    "200": {
+      description: "Updated successfully"
+    },
+    "400": {
+      description: "Missing parameters"
+    },
+    "404": {
+      description: "User and phone not found"
+    },
+    "500": {
+      description: "Internal server error"
+    },
+  },
+  parameters: [{
+    in: "body",
+    name: "data",
+    required: true,
+    type: "object",
+    description: "Body content",
+    properties: {
+      name: {type: 'string'},
+      gender: {type: 'string'},
+      birthDate: {type: 'string'}, 
+    }
+  },
+],
+},
+},
+
 
   /***************************************************************************
   *                                                                          *

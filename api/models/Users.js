@@ -29,7 +29,7 @@ module.exports = {
       isIn: ['male','female','other']
     },
     birthdate: {
-      type: 'string',
+      type: 'ref',
       columnType: 'date'
     },
     conditions: {

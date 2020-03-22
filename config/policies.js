@@ -23,6 +23,6 @@ module.exports.policies = {
     'check': true,
     'sendSMS': true
   },
-  // '*': ['isAuthorized'],
+   '*': ['isAuthorized'],
 
 };
