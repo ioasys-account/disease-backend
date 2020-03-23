@@ -6,6 +6,11 @@
  */
 
 module.exports = (req, res, next) => {
+
+  if (req.url.includes('swagger')) {
+    return next();
+  }
+
   let token;
 
   if (req.headers && req.headers.authorization) {
