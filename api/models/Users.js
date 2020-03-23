@@ -32,10 +32,6 @@ module.exports = {
       type: 'ref',
       columnType: 'date'
     },
-    conditions: {
-      type: 'json',
-      isIn: ['chronic_respiratory_disease','cardiovascular_disease','diabetes','hypertension','chronic_renal_failure']
-    },
     token: {
       type: 'string',
       allowNull: null
